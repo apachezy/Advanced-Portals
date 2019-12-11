@@ -371,14 +371,14 @@ public class Portal {
     public static boolean activate(Player player, AdvancedPortal portal) {
 
         if(blockSpectatorMode && player.getGameMode() == GameMode.SPECTATOR) {
-            player.sendMessage(PluginMessages.customPrefixFail + "\u00A7c You cannot enter a portal in spectator mode!");
+            player.sendMessage(PluginMessages.customPrefixFail + "§c观察模式不能进入这个传送门!");
             return false;
         }
 
         String permission = portal.getArg("permission");
 
         if (!(permission == null || player.hasPermission(permission) || player.isOp())) {
-            player.sendMessage(PluginMessages.customPrefixFail + "\u00A7c You do not have permission to use this portal!");
+            player.sendMessage(PluginMessages.customPrefixFail + "§c你没有权限使用这个传送门!");
             failSound(player, portal);
             throwPlayerBack(player);
             return false;
@@ -388,7 +388,7 @@ public class Portal {
             int diff = (int) ((System.currentTimeMillis() - cooldown.get(player.getName())) / 1000);
             if (diff < cooldelay) {
                 int time = (cooldelay - diff);
-                player.sendMessage(ChatColor.RED + "Please wait " + ChatColor.YELLOW + time + ChatColor.RED + (time == 1 ? "second" : "seconds") + " until attempting to enter this portal again.");
+                player.sendMessage(ChatColor.RED + "请稍等, " + ChatColor.YELLOW + time + ChatColor.RED + " 秒以后才能再次使用传送门.");
                 failSound(player, portal);
                 throwPlayerBack(player);
                 return false;
